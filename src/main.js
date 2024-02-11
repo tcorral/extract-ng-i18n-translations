@@ -14,18 +14,19 @@ async function run() {
         let otherLocales = core.getInput('OTHER_LOCALES');
         otherLocales = otherLocales.length === 0 ? [] : otherLocales.split(',');
         core.debug(`Other locales value: ${otherLocales}`);
+        const csvPath = core.getInput('CSV_PATH', { required: true });
+        core.debug(`CSV Path value: ${directoryPath}`);
+
+        core.debug(`Resolved path: ${path.resolve(directoryPath)}`);
 
         // Example usage
-        const translations = extractTranslationsFromDirectory(directoryPath, defaultLocale, otherLocales);
+        const translations = extractTranslationsFromDirectory(path.resolve(directoryPath), defaultLocale, otherLocales);
 
         core.debug(`Translations: \r\n${JSON.stringify(translations)}`);
 
-        const outputPath = path.join(process.cwd(), 'translations.csv');
-        core.debug(`Output path: ${outputPath}`);
-
         core.notice(`Writing CSV file`);
-        writeToCSV(translations, outputPath, defaultLocale, otherLocales);
-        core.notice(`CSV file has been created in ${outputPath}`);
+        writeToCSV(translations, csvPath, defaultLocale, otherLocales);
+        core.notice(`CSV file has been created in ${csvPath}`);
     } catch (error) {
         core.error(`Action has failed: ${error.message}`);
         core.setFailed(error.message);

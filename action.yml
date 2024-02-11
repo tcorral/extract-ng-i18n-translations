@@ -18,16 +18,6 @@ inputs:
   OTHER_LOCALES:
     description: "Comma-separated list of other language codes following ISO 639-1"
 
-
-
-
-const directoryPath = core.getInput('Directory path', { required: true });
-        core.debug(`Directory Path value: ${directoryPath}`);
-        const defaultLocale = core.getInput('Default locale', { required: true });
-        core.debug(`Default locale value: ${defaultLocale}`);
-        let otherLocales = core.getInput('Other locales (comma-separated)');
-        otherLocales = otherLocales.length === 0 ? [] : otherLocales.split(',');
-        core.debug(`Other locales value: ${otherLocales}`);
 runs:
-  using: "node12"
+  using: "node20"
   main: "dist/index.js"
