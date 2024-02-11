@@ -1,0 +1,33 @@
+name: "Extract Angular i18n Translations Action"
+description: "Parses TypeScript and HTML files in an Angular repository to extract Angular i18n translation keys and values"
+author: "Tomas Corral Casas"
+
+inputs:
+  GITHUB_TOKEN:
+    description: "Github token"
+    required: true
+  TENOR_TOKEN:
+    description: "Tenor API Token"
+    required: true
+  DIRECTORY_PATH:
+    description: "Directory path to look for i18n translations"
+    required: true
+  DEFAULT_LOCALE:
+    description: "Default language code following ISO 639-1 standard"
+    required: true
+  OTHER_LOCALES:
+    description: "Comma-separated list of other language codes following ISO 639-1"
+
+
+
+
+const directoryPath = core.getInput('Directory path', { required: true });
+        core.debug(`Directory Path value: ${directoryPath}`);
+        const defaultLocale = core.getInput('Default locale', { required: true });
+        core.debug(`Default locale value: ${defaultLocale}`);
+        let otherLocales = core.getInput('Other locales (comma-separated)');
+        otherLocales = otherLocales.length === 0 ? [] : otherLocales.split(',');
+        core.debug(`Other locales value: ${otherLocales}`);
+runs:
+  using: "node12"
+  main: "dist/index.js"
