@@ -1,0 +1,30 @@
+{
+  "name": "extract-ng-i18n-translations",
+  "version": "1.0.0",
+  "description": "A Github Action to extract and document Angular i18n translations from HTML and TypeScript files",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcorral/extract-ng-i18n-translations.git"
+  },
+  "keywords": [
+    "actions",
+    "angular",
+    "i18n",
+    "translation-keys",
+    "document"
+  ],
+  "author": "Tomas Corral",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcorral/extract-ng-i18n-translations/issues"
+  },
+  "homepage": "https://github.com/tcorral/extract-ng-i18n-translations#readme",
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  }
+}
