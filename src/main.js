@@ -1,8 +1,6 @@
 const core = require('@actions/core');
 const path = require('path');
-const Utils = require('./utils');
-const extractTranslationsFromDirectory = Utils.extractTranslationsFromDirectory;
-const writeToCSV = Utils.writeToCSV;
+const utils = require('./utils');
 
 async function run() {
     try {
@@ -15,17 +13,15 @@ async function run() {
         otherLocales = otherLocales.length === 0 ? [] : otherLocales.split(',');
         core.debug(`Other locales value: ${otherLocales}`);
         const csvPath = core.getInput('CSV_PATH', { required: true });
-        core.debug(`CSV Path value: ${directoryPath}`);
-
-        core.debug(`Resolved path: ${path.resolve(directoryPath)}`);
+        core.debug(`CSV Path value: ${csvPath}`);
 
         // Example usage
-        const translations = extractTranslationsFromDirectory(path.resolve(directoryPath), defaultLocale, otherLocales);
+        const translations = utils.extractTranslationsFromDirectory(path.resolve(directoryPath), defaultLocale, otherLocales);
 
-        core.debug(`Translations: \r\n${JSON.stringify(translations)}`);
+        core.debug(`Translations: ${JSON.stringify(translations)}`);
 
         core.notice(`Writing CSV file`);
-        writeToCSV(translations, csvPath, defaultLocale, otherLocales);
+        utils.writeToCSV(translations, csvPath, defaultLocale, otherLocales);
         core.notice(`CSV file has been created in ${csvPath}`);
     } catch (error) {
         core.error(`Action has failed: ${error.message}`);
